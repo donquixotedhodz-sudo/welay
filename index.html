@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welay</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="portrait-container">
+        <p id="lyrics"></p>
+    </div>
+    <!-- SVG filter to bend text along image features -->
+    
+    <script>
+        (function () {
+            const el = document.getElementById('lyrics');
+            const phrase = 'i love you ';
+            // Generate a large block of lyrics to fill the area
+            const targetChars = 60000; // adjust density as needed
+            el.textContent = phrase.repeat(Math.ceil(targetChars / phrase.length));
+
+            // Interactive zoom: ctrl+scroll or pinch zoom on the portrait
+            const container = document.querySelector('.portrait-container');
+            let scale = 1;
+
+            function applyScale() {
+                el.style.transform = `scale(${scale})`;
+            }
+
+            container.addEventListener('wheel', (e) => {
+                // Use ctrlKey to detect pinch-to-zoom or explicit zoom intent
+                if (e.ctrlKey) {
+                    e.preventDefault();
+                    const factor = e.deltaY < 0 ? 1.08 : 0.92; // smooth zoom
+                    scale = Math.min(6, Math.max(0.3, scale * factor));
+                    applyScale();
+                }
+            }, { passive: false });
+
+            // Double-click to reset zoom
+            container.addEventListener('dblclick', () => {
+                scale = 1;
+                applyScale();
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Use min-height for better responsiveness */
+    margin: 0;
+    background-color: #262626; /* Dark background for contrast */
+}
+
+.portrait-container {
+    width: 100vw; /* Full screen width */
+    height: 100vh; /* Full screen height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Keep scaled content within bounds */
+}
+
+.portrait-container p {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-size: 8px; /* Adjust font size to control detail */
+    line-height: 8px; /* Adjust line height to control text density */
+    background: url('bg.jpeg'); /* Path to your chosen image */
+    background-position: center;
+    background-size: cover; /* Ensure the image covers the text area */
+    -webkit-background-clip: text; /* Clip the background to the text shape */
+    background-clip: text; /* Standard property for clipping */
+    -webkit-text-fill-color: rgba(255, 255, 255, 0); /* Make text transparent to reveal background */
+    color: transparent; /* Fallback for browsers not supporting -webkit-text-fill-color */
+    text-align: justify; /* Stretch lines to fill width for better coverage */
+    letter-spacing: 0.3px; /* Slight spacing to tune density */
+    word-break: break-word; /* Ensure wrapping keeps filling */
+    white-space: normal; /* Allow natural wrapping */
+    padding: 20px; /* Add some padding around the text */
+    transform-origin: center center;
+    will-change: transform; /* Hint for smoother scaling */
+    filter: url(#text-bend); /* Bend the text following the image map */
+}
